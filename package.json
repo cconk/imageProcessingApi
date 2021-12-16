@@ -1,0 +1,29 @@
+{
+  "name": "imageprocessingapi",
+  "version": "1.0.0",
+  "description": "udacity image processing api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "npx tsc",
+    "jasmine": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cconk/imageProcessingApi.git"
+  },
+  "author": "cconk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cconk/imageProcessingApi/issues"
+  },
+  "homepage": "https://github.com/cconk/imageProcessingApi#readme",
+  "dependencies": {
+    "jasmine": "^3.10.0",
+    "jasmine-spec-reporter": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.10.2",
+    "typescript": "^4.5.4"
+  }
+}
