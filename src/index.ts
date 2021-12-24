@@ -1,20 +1,17 @@
-import express from 'express';
+import express from 'express'
 
-const app = express();
+const app = express()
 
-const port = 3000;
+const port = 3000
 
 app.get('/api', (req, res) => {
-    res.send('Hello, world!')
-});
-
-app.listen(port, () => {
-    console.log(`server started at localhost:${port}`)
+  res.send(
+    '<h1>Welcome Home</h1>'
+  );
 })
 
-const myName = 'chad conklin';
+app.listen(port, () => {
+  console.log(`server started at localhost:${port}`)
+})
 
-const hello = (userName: string): string => `hello , ${userName}`;
-
-console.log(hello(myName));
 
