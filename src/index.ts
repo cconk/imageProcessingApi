@@ -1,28 +1,14 @@
 import express from 'express'
+import routes from './routes/index';
 
-const app = express()
+const app = express();
+const port = 3000;
 
-const port = 3000
+app.use(routes);
 
-const logger = (
-  req: express.Request,
-  res: express.Response,
-  next: Function
-): void => {
-  const url = req.url;
-  console.log(`${url} was visited`);
-  next();
-};
-
-app.get('/', logger, (req, res) => {
-  
-  res.send(
-    '<h1>Welcome Home</h1>'
-  );
-});
-
-app.listen(port, () => {
+app.listen(port, async ():Promise<void> => {
   console.log(`server started at localhost:${port}`)
 });
 
 
+export default app;
