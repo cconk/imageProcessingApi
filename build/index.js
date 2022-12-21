@@ -50,4 +50,4 @@ app.listen(port, function () { return __awaiter(void 0, void 0, void 0, function
         return [2 /*return*/];
     });
 }); });
-//export default app;
+exports.default = app;

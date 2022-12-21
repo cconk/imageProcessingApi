@@ -39,22 +39,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.fileExtension = exports.thumbImagesPath = exports.imagesPath = void 0;
 var fs_1 = require("fs");
 var path_1 = __importDefault(require("path"));
 var sharp_1 = __importDefault(require("sharp"));
-var imagesPath = path_1.default.resolve(__dirname, '../../images/normal');
-var thumbImagesPath = path_1.default.resolve(__dirname, '../../images/thumbs');
-var fileExtension = '.jpg';
+exports.imagesPath = path_1.default.resolve(__dirname, '../../images/normal');
+exports.thumbImagesPath = path_1.default.resolve(__dirname, '../../images/thumbs');
+exports.fileExtension = '.jpg';
 var ImageUtilities = /** @class */ (function () {
     function ImageUtilities() {
     }
     //seting up as a function so additional file types png gif etc. might be used in the future
     ImageUtilities.buildFilePath = function (filename) {
-        return "".concat(imagesPath, "\\").concat(filename).concat(fileExtension);
+        return "".concat(exports.imagesPath, "\\").concat(filename).concat(exports.fileExtension);
     };
     //builds the thumb file path to send to the route
     ImageUtilities.buildThumbFilePath = function (filename) {
-        return "".concat(thumbImagesPath, "\\").concat(filename).concat(fileExtension);
+        return "".concat(exports.thumbImagesPath, "\\").concat(filename).concat(exports.fileExtension);
     };
     //creates the new thumb file if it does not already exist
     ImageUtilities.buildThumbFile = function (filename, height, width) {
@@ -70,7 +71,7 @@ var ImageUtilities = /** @class */ (function () {
                             })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [2 /*return*/, "Your image file called ".concat(filename, " was resized to a height of ").concat(height, " and a width of ").concat(width, ".")];
                 }
             });
         });
