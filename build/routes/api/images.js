@@ -40,14 +40,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("./routes/index"));
-var app = (0, express_1.default)();
-var port = 3000;
-app.use(index_1.default);
-app.listen(port, function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        console.log("server started at localhost:".concat(port));
-        return [2 /*return*/];
+var utilities_1 = __importDefault(require("../../utilities/utilities"));
+var images = express_1.default.Router();
+images.get('/', function (req, res) {
+    res.send("<p>You can use this api to process images by supplying the query parameters to the following path. For Example\n    /api/images/process?filename=sampleFile&height=200&width=200 will return a file resized to the height and width parameters given\n    and with a filename of sampleFile.</p>");
+});
+images.get('/process', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var filename, height, width, thumbFileCheck;
+    var _a, _b, _c;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                filename = (_a = req.query.filename) === null || _a === void 0 ? void 0 : _a.toString();
+                height = (_b = req.query.height) === null || _b === void 0 ? void 0 : _b.toString();
+                width = (_c = req.query.width) === null || _c === void 0 ? void 0 : _c.toString();
+                if (!(!filename || !height || !width)) return [3 /*break*/, 1];
+                res.send('Please enter all necessary parameters for your file to be diplayed including filename, height and width.');
+                return [3 /*break*/, 5];
+            case 1: return [4 /*yield*/, utilities_1.default.checkForThumbFile(filename).then(function (value) {
+                    return value;
+                })];
+            case 2:
+                thumbFileCheck = _d.sent();
+                if (!!thumbFileCheck) return [3 /*break*/, 4];
+                //if no file exists then create it based on imaged given and return it to browser compensating for processing delay
+                return [4 /*yield*/, utilities_1.default.buildThumbFile(filename, Number(height), Number(width)).then(function () {
+                        res.setTimeout(4000, function () {
+                            res.sendFile(utilities_1.default.buildThumbFilePath(filename));
+                        });
+                    })];
+            case 3:
+                //if no file exists then create it based on imaged given and return it to browser compensating for processing delay
+                _d.sent();
+                return [3 /*break*/, 5];
+            case 4:
+                //if file is cached return it with no processing delay
+                res.sendFile(utilities_1.default.buildThumbFilePath(filename));
+                _d.label = 5;
+            case 5: return [2 /*return*/];
+        }
     });
 }); });
-//export default app;
+exports.default = images;

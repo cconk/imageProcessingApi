@@ -14,7 +14,7 @@ export default class ImageUtilities {
   }
 
   //builds the thumb file path to send to the route
-  static buildThumbFilePath(filename?: string, height?: number, width?: number): string {
+  static buildThumbFilePath(filename?: string): string {
     return `${thumbImagesPath}\\${filename}${fileExtension}`;
   }
 

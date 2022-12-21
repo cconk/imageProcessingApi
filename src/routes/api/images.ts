@@ -4,11 +4,12 @@ import ImageUtilities from '../../utilities/utilities';
 const images = express.Router();
 
 images.get('/', (req: express.Request, res: express.Response) => {
-  res.send('base images url');
-  console.log(req.params);
+  res.send(`<p>You can use this api to process images by supplying the query parameters to the following path. For Example
+    /api/images/process?filename=sampleFile&height=200&width=200 will return a file resized to the height and width parameters given
+    and with a filename of sampleFile.</p>`);
 });
 
-images.get('/testing', async (req: express.Request, res: express.Response) => {
+images.get('/process', async (req: express.Request, res: express.Response) => {
   const filename = req.query.filename?.toString();
   const height = req.query.height?.toString();
   const width = req.query.width?.toString();
