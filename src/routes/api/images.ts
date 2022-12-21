@@ -27,18 +27,16 @@ images.get('/process', async (req: express.Request, res: express.Response) => {
     });
     if (!thumbFileCheck) {
       //if no file exists then create it based on imaged given and return it to browser compensating for processing delay
-      await ImageUtilities.buildThumbFile(
-        filename,
-        Number(height),
-        Number(width)
-      ).then(() => {
+      await ImageUtilities.buildThumbFile(filename, height, width).then(() => {
         res.setTimeout(4000, () => {
-          res.sendFile(ImageUtilities.buildThumbFilePath(filename));
+          res.sendFile(
+            ImageUtilities.buildThumbFilePath(filename, height, width)
+          );
         });
       });
     } else {
       //if file is cached return it with no processing delay
-      res.sendFile(ImageUtilities.buildThumbFilePath(filename));
+      res.sendFile(ImageUtilities.buildThumbFilePath(filename, height, width));
     }
   }
 });

@@ -64,9 +64,9 @@ images.get('/process', function (req, res) { return __awaiter(void 0, void 0, vo
                 thumbFileCheck = _d.sent();
                 if (!!thumbFileCheck) return [3 /*break*/, 4];
                 //if no file exists then create it based on imaged given and return it to browser compensating for processing delay
-                return [4 /*yield*/, utilities_1.default.buildThumbFile(filename, Number(height), Number(width)).then(function () {
+                return [4 /*yield*/, utilities_1.default.buildThumbFile(filename, height, width).then(function () {
                         res.setTimeout(4000, function () {
-                            res.sendFile(utilities_1.default.buildThumbFilePath(filename));
+                            res.sendFile(utilities_1.default.buildThumbFilePath(filename, height, width));
                         });
                     })];
             case 3:
@@ -75,7 +75,7 @@ images.get('/process', function (req, res) { return __awaiter(void 0, void 0, vo
                 return [3 /*break*/, 5];
             case 4:
                 //if file is cached return it with no processing delay
-                res.sendFile(utilities_1.default.buildThumbFilePath(filename));
+                res.sendFile(utilities_1.default.buildThumbFilePath(filename, height, width));
                 _d.label = 5;
             case 5: return [2 /*return*/];
         }

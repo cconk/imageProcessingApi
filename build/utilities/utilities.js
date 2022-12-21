@@ -54,8 +54,9 @@ var ImageUtilities = /** @class */ (function () {
         return "".concat(exports.imagesPath, "\\").concat(filename).concat(exports.fileExtension);
     };
     //builds the thumb file path to send to the route
-    ImageUtilities.buildThumbFilePath = function (filename) {
-        return "".concat(exports.thumbImagesPath, "\\").concat(filename).concat(exports.fileExtension);
+    ImageUtilities.buildThumbFilePath = function (filename, height, width) {
+        var newFileName = filename && height && width ? filename + height + width : undefined;
+        return "".concat(exports.thumbImagesPath, "\\").concat(newFileName).concat(exports.fileExtension);
     };
     //creates the new thumb file if it does not already exist
     ImageUtilities.buildThumbFile = function (filename, height, width) {
@@ -64,9 +65,11 @@ var ImageUtilities = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        thumbPath = this.buildThumbFilePath(filename);
+                        thumbPath = this.buildThumbFilePath(filename, height, width);
                         path = this.buildFilePath(filename);
-                        return [4 /*yield*/, (0, sharp_1.default)(path).resize(height, width).toFile(thumbPath, function (err, info) {
+                        return [4 /*yield*/, (0, sharp_1.default)(path)
+                                .resize(Number(height), Number(width))
+                                .toFile(thumbPath, function () {
                                 return;
                             })];
                     case 1:
@@ -77,13 +80,13 @@ var ImageUtilities = /** @class */ (function () {
         });
     };
     //checks to see if the file already exists
-    ImageUtilities.checkForThumbFile = function (filename) {
+    ImageUtilities.checkForThumbFile = function (filename, height, width) {
         return __awaiter(this, void 0, void 0, function () {
             var thumbPath, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        thumbPath = this.buildThumbFilePath(filename);
+                        thumbPath = this.buildThumbFilePath(filename, height, width);
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 3, , 4]);

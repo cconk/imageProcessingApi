@@ -13,20 +13,26 @@ export default class ImageUtilities {
   }
 
   //builds the thumb file path to send to the route
-  static buildThumbFilePath(filename?: string): string {
-    return `${thumbImagesPath}\\${filename}${fileExtension}`;
+  static buildThumbFilePath(
+    filename?: string,
+    height?: string,
+    width?: string
+  ): string {
+    const newFileName: string | undefined =
+      filename && height && width ? filename + height + width : undefined;
+    return `${thumbImagesPath}\\${newFileName}${fileExtension}`;
   }
 
   //creates the new thumb file if it does not already exist
   static async buildThumbFile(
     filename?: string,
-    height?: number,
-    width?: number
+    height?: string,
+    width?: string
   ): Promise<string> {
-    const thumbPath = this.buildThumbFilePath(filename);
+    const thumbPath = this.buildThumbFilePath(filename, height, width);
     const path = this.buildFilePath(filename);
     await sharp(path)
-      .resize(height, width)
+      .resize(Number(height), Number(width))
       .toFile(thumbPath, () => {
         return;
       });
@@ -34,8 +40,12 @@ export default class ImageUtilities {
   }
 
   //checks to see if the file already exists
-  static async checkForThumbFile(filename?: string): Promise<boolean> {
-    const thumbPath = this.buildThumbFilePath(filename);
+  static async checkForThumbFile(
+    filename?: string,
+    height?: string,
+    width?: string
+  ): Promise<boolean> {
+    const thumbPath = this.buildThumbFilePath(filename, height, width);
     try {
       await fs.access(thumbPath);
       return true;

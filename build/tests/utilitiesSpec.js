@@ -42,18 +42,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var utilities_1 = __importDefault(require("../utilities/utilities"));
 var utilities_2 = require("../utilities/utilities");
 describe('utilities tests', function () {
-    it('should return a path to a normal image named normal', function () {
+    it('should return a path to a normal image named normal to be processed by api', function () {
         var string = utilities_1.default.buildFilePath('normal');
         expect(string).toBe("".concat(utilities_2.imagesPath, "\\normal").concat(utilities_2.fileExtension));
     });
-    it('should return a path to a thumb image named thumb', function () {
-        var string = utilities_1.default.buildThumbFilePath('thumb');
-        expect(string).toBe("".concat(utilities_2.thumbImagesPath, "\\thumb").concat(utilities_2.fileExtension));
+    it('should return a path to a thumb image named thumb200200.jpg', function () {
+        var string = utilities_1.default.buildThumbFilePath('thumb', '200', '200');
+        expect(string).toBe("".concat(utilities_2.thumbImagesPath, "\\thumb200200").concat(utilities_2.fileExtension));
     });
     it('should complete processing a file', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, expectAsync(utilities_1.default.buildThumbFile('testImage', 200, 200)).toBeResolved()];
+                case 0: return [4 /*yield*/, expectAsync(utilities_1.default.buildThumbFile('testImage', '200', '200')).toBeResolved()];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -64,7 +64,7 @@ describe('utilities tests', function () {
         var processingMessage;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, utilities_1.default.buildThumbFile('testImage', 200, 200)];
+                case 0: return [4 /*yield*/, utilities_1.default.buildThumbFile('testImage', '200', '200')];
                 case 1:
                     processingMessage = _a.sent();
                     expect(processingMessage).toEqual("Your image file called testImage was resized to a height of 200 and a width of 200.");
