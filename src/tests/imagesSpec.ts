@@ -8,9 +8,4 @@ describe('Test endpoint responses', () => {
     const response = await request.get('/api/images');
     expect(response.status).toBe(200);
   });
-
-  it('gets the processing api endpoint', async () => {
-    const response = await request.get('/api/images/process');
-    expect(response.status).toBe(200);
-  });
 });
