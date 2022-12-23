@@ -46,7 +46,7 @@ describe('utilities tests', () => {
     );
   });
 
-  it('should return false', async () => {
-    await expectAsync(ImageUtilities.checkForThumbFile()).toBeResolvedTo(false);
+  it('should return false', () => {
+    expect(ImageUtilities.checkForThumbFile()).toBeFalsy;
   });
 });

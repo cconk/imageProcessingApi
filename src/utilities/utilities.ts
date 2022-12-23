@@ -59,14 +59,14 @@ export default class ImageUtilities {
   }
 
   //checks to see if the file already exists
-  static async checkForThumbFile(
+  static checkForThumbFile(
     filename?: string,
     height?: string,
     width?: string
-  ): Promise<boolean> {
+  ): boolean {
     const thumbPath = this.buildThumbFilePath(filename, height, width);
     try {
-      await fs.promises.access(thumbPath);
+      fs.accessSync(thumbPath);
       return true;
     } catch {
       return false;
